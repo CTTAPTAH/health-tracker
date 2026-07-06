@@ -1,5 +1,6 @@
 from pathlib import Path
 from decouple import config
+from django.conf.global_settings import AUTH_USER_MODEL
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,6 +20,10 @@ INSTALLED_APPS = [
     # Сторонние библиотеки
     'rest_framework',
     'rest_framework_simplejwt',
+    # Наши приложения
+    'users',
+    'nutrition',
+    'weight',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +66,8 @@ DATABASES = {
         'PORT': config('DB_PORT', default='5432'),
     }
 }
+
+AUTH_USER_MODEL = 'users.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
