@@ -35,6 +35,7 @@ class MealItem(models.Model):
     meal = models.ForeignKey(
         Meal,
         on_delete=models.CASCADE,
+        related_name='items',
         verbose_name='Приём пищи'
     )
     name = models.CharField(

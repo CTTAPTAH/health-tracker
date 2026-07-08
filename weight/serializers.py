@@ -4,4 +4,4 @@ from .models import WeightEntry
 class WeightEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = WeightEntry
-        fields = ("id", "date", "weight")
+        fields = ('id', 'date', 'weight')
