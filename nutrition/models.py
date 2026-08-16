@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 from users.models import User
 
 class Meal(models.Model):
@@ -52,21 +53,25 @@ class MealItem(models.Model):
     calories = models.DecimalField(
         max_digits=6,
         decimal_places=2,
+        validators=[MinValueValidator(0)],
         verbose_name='Калорийность (на 100 г/мл)'
     )
     protein = models.DecimalField(
         max_digits=6,
         decimal_places=2,
+        validators=[MinValueValidator(0)],
         verbose_name='Белки (на 100 г/мл)'
     )
     fat = models.DecimalField(
         max_digits=6,
         decimal_places=2,
+        validators=[MinValueValidator(0)],
         verbose_name='Жиры (на 100 г/мл)'
     )
     carbs = models.DecimalField(
         max_digits=6,
         decimal_places=2,
+        validators=[MinValueValidator(0)],
         verbose_name='Углеводы (на 100 г/мл)'
     )
 
@@ -89,21 +94,25 @@ class Product(models.Model):
     calories = models.DecimalField(
         max_digits=6,
         decimal_places=2,
+        validators=[MinValueValidator(0)],
         verbose_name='Калорийность (на 100 г/мл)'
     )
     protein = models.DecimalField(
         max_digits=6,
         decimal_places=2,
+        validators=[MinValueValidator(0)],
         verbose_name='Белки (на 100 г/мл)'
     )
     fat = models.DecimalField(
         max_digits=6,
         decimal_places=2,
+        validators=[MinValueValidator(0)],
         verbose_name='Жиры (на 100 г/мл)'
     )
     carbs = models.DecimalField(
         max_digits=6,
         decimal_places=2,
+        validators=[MinValueValidator(0)],
         verbose_name='Углеводы (на 100 г/мл)'
     )
 
@@ -131,21 +140,25 @@ class UserProduct(models.Model):
     calories = models.DecimalField(
         max_digits=6,
         decimal_places=2,
+        validators=[MinValueValidator(0)],
         verbose_name='Калорийность (на 100 г/мл)'
     )
     protein = models.DecimalField(
         max_digits=6,
         decimal_places=2,
+        validators=[MinValueValidator(0)],
         verbose_name='Белки (на 100 г/мл)'
     )
     fat = models.DecimalField(
         max_digits=6,
         decimal_places=2,
+        validators=[MinValueValidator(0)],
         verbose_name='Жиры (на 100 г/мл)'
     )
     carbs = models.DecimalField(
         max_digits=6,
         decimal_places=2,
+        validators=[MinValueValidator(0)],
         verbose_name='Углеводы (на 100 г/мл)'
     )
 

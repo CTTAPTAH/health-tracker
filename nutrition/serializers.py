@@ -14,6 +14,16 @@ class MealSerializer(serializers.ModelSerializer):
         model = Meal
         fields = ('id', 'meal_type', 'date', 'items')
 
+    def validate(self, attrs):
+        user = self.context['request'].user
+        date = attrs.get('date')
+        meal_type = attrs.get('meal_type')
+
+        if Meal.objects.filter(user=user, date=date, meal_type=meal_type).exists():
+            raise serializers.ValidationError('Такой приём пищи на эту дату уже существует.')
+
+        return attrs
+
     def create(self, validated_data):
         items_data = validated_data.pop('items')
         with transaction.atomic():
