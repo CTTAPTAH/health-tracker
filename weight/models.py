@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.db import models
 from django.core.validators import MinValueValidator
 from users.models import User
@@ -14,7 +15,7 @@ class WeightEntry(models.Model):
     weight = models.DecimalField(
         max_digits=5,
         decimal_places=2,
-        validators=[MinValueValidator(0.1)],
+        validators=[MinValueValidator(Decimal('0.1'))],
         verbose_name='Вес (кг)'
     )
 
