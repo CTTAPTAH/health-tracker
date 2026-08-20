@@ -1,4 +1,7 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import IsAuthenticated
+
+from users.permissions import IsOwner
 from .models import Meal, Product, UserProduct
 from .serializers import MealSerializer, ProductSerializer, UserProductSerializer
 
@@ -14,6 +17,7 @@ class MealListCreateView(ListCreateAPIView):
 
 class MealDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = MealSerializer
+    permission_classes = [IsAuthenticated, IsOwner]
 
     def get_queryset(self):
         return Meal.objects.filter(user=self.request.user)
@@ -38,6 +42,7 @@ class UserProductListCreateView(ListCreateAPIView):
         serializer.save(user=self.request.user)
 
 class UserProductDetailView(RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, IsOwner]
     serializer_class = UserProductSerializer
 
     def get_queryset(self):
