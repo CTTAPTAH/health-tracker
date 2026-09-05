@@ -6,7 +6,7 @@ from decimal import Decimal
 
 from users.models import User
 from weight.models import WeightEntry
-from analytics.services import calculate_target_calories
+from analytics.services.calorie_calculator import calculate_target_calories
 
 @pytest.fixture
 def user(db):

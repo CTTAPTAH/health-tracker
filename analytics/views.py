@@ -6,7 +6,7 @@ from rest_framework import status
 
 from weight.models import WeightEntry
 from .serializers import CalorieCalculatorSerializer
-from .services import calculate_target_calories
+from .services.calorie_calculator import calculate_target_calories
 
 class CalorieCalculatorView(APIView):
     def post(self, request):
