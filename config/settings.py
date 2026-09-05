@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'users',
     'nutrition',
     'weight',
+    'analytics'
 ]
 
 MIDDLEWARE = [
