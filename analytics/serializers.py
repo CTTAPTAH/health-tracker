@@ -21,3 +21,6 @@ class CalorieCalculatorSerializer(serializers.Serializer):
     activity_level = serializers.ChoiceField(choices=ACTIVITY_CHOICES, required=False)
     target_weight_change = serializers.DecimalField(max_digits=5, decimal_places=2)
     days = serializers.IntegerField(min_value=1)
+
+class WeightForecastSerializer(serializers.Serializer):
+    days_ahead = serializers.IntegerField(min_value=1, max_value=30, required=False, default=14)
