@@ -94,3 +94,12 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
 }
+
+# ИИ настройки
+GEMINI_API_KEY = config('GEMINI_API_KEY')
+GEMINI_MODEL = config('GEMINI_MODEL')
+
+# retry
+RETRY_MAX_ATTEMPTS = config('RETRY_MAX_ATTEMPTS', cast=int)
+RETRY_DELAY_SECONDS = config('RETRY_DELAY_SECONDS', cast=int)
+RETRY_MULTIPLIER = config('RETRY_MULTIPLIER', cast=int)
