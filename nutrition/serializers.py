@@ -41,3 +41,6 @@ class UserProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProduct
         fields = ('id', 'name', 'is_liquid', 'calories', 'protein', 'fat', 'carbs')
+
+class MealAIParseSerializer(serializers.Serializer):
+    description = serializers.CharField(min_length=3, max_length=1000)

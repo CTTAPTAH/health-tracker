@@ -3,6 +3,7 @@ from .views import (
     MealListCreateView, MealDetailView,
     ProductListView, ProductDetailView,
     UserProductListCreateView, UserProductDetailView,
+    MealAIParseView
 )
 
 urlpatterns = [
@@ -14,4 +15,6 @@ urlpatterns = [
 
     path('user-products/', UserProductListCreateView.as_view()),
     path('user-products/<int:pk>/', UserProductDetailView.as_view()),
+
+    path('ai-parse/', MealAIParseView.as_view()),
 ]
