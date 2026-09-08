@@ -64,3 +64,16 @@ button:hover {
 .error {
     color: #c0392b;
 }
+
+.item-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.item-row input[type="text"],
+.item-row input[type="number"] {
+    max-width: 120px;
+}

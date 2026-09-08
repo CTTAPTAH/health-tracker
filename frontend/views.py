@@ -16,3 +16,5 @@ class LoginView(TemplateView):
     """
     template_name = 'frontend/login.html'
 
+class NutritionView(TemplateView):
+    template_name = 'frontend/nutrition.html'

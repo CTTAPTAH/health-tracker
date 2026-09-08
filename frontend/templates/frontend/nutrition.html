@@ -1,0 +1,35 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %}Питание — Health Tracker{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h2>Добавить приём пищи</h2>
+        <form id="meal-form">
+            <select id="meal-type" required>
+                <option value="breakfast">Завтрак</option>
+                <option value="lunch">Обед</option>
+                <option value="dinner">Ужин</option>
+                <option value="snack">Перекус</option>
+            </select>
+            <input type="date" id="meal-date" required>
+
+            <div id="items-container"></div>
+            <button type="button" id="add-item-btn">+ Продукт</button>
+
+            <br><br>
+            <button type="submit">Сохранить приём пищи</button>
+            <p class="error" id="meal-error"></p>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Приёмы пищи</h2>
+        <div id="meals-list"></div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'frontend/js/nutrition.js' %}"></script>
+{% endblock %}
