@@ -22,6 +22,9 @@
         {% block content %}{% endblock %}
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2/locale/ru/index.js"></script>
     <script src="{% static 'frontend/js/api.js' %}"></script>
     {% block extra_js %}{% endblock %}
 </body>
