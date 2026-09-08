@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Health Tracker{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'frontend/css/main.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{% url 'frontend:dashboard' %}">Health Tracker</a>
+        <div class="nav-links">
+            <a href="{% url 'frontend:dashboard' %}">Дашборд</a>
+            <a href="#" id="logout-btn">Выйти</a>
+        </div>
+    </nav>
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{% static 'frontend/js/api.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

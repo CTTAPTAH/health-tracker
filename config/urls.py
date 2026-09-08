@@ -9,6 +9,7 @@ urlpatterns = [
     path('api/nutrition/', include('nutrition.urls')),
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
-
     path('api/analytics/', include('analytics.urls')),
+
+    path('', include('frontend.urls')),
 ]
