@@ -1,1 +1,24 @@
-<h1>Логин</h1>
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %}Вход — Health Tracker{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h1>Вход</h1>
+        <form id="login-form">
+            <div>
+                <input type="text" id="username" placeholder="Логин" required>
+            </div>
+            <div>
+                <input type="password" id="password" placeholder="Пароль" required>
+            </div>
+            <button type="submit">Войти</button>
+            <p class="error" id="login-error"></p>
+        </form>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'frontend/js/login.js' %}"></script>
+{% endblock %}
