@@ -48,31 +48,31 @@ class MealItem(models.Model):
         verbose_name='Жидкость'
     )
     amount = models.PositiveSmallIntegerField(
-        verbose_name='Масса (г/мл)'
+        verbose_name='Масса (всего, за указанное количество)'
     )
     calories = models.DecimalField(
         max_digits=6,
         decimal_places=2,
         validators=[MinValueValidator(0)],
-        verbose_name='Калорийность (на 100 г/мл)'
+        verbose_name='Калорийность (всего, за указанное количество)'
     )
     protein = models.DecimalField(
         max_digits=6,
         decimal_places=2,
         validators=[MinValueValidator(0)],
-        verbose_name='Белки (на 100 г/мл)'
+        verbose_name='Белки (всего, за указанное количество)'
     )
     fat = models.DecimalField(
         max_digits=6,
         decimal_places=2,
         validators=[MinValueValidator(0)],
-        verbose_name='Жиры (на 100 г/мл)'
+        verbose_name='Жиры (всего, за указанное количество)'
     )
     carbs = models.DecimalField(
         max_digits=6,
         decimal_places=2,
         validators=[MinValueValidator(0)],
-        verbose_name='Углеводы (на 100 г/мл)'
+        verbose_name='Углеводы (всего, за указанное количество)'
     )
 
     class Meta:

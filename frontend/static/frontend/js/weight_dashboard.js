@@ -13,7 +13,18 @@ async function loadWeightList() {
         .slice(0, 10)
         .forEach(entry => {
             const li = document.createElement('li');
-            li.textContent = `${entry.date}: ${entry.weight} кг`;
+            li.textContent = `${entry.date}: ${entry.weight} кг `;
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Удалить';
+            deleteBtn.addEventListener('click', async () => {
+                const resp = await apiFetch(`/weight/${entry.id}/`, { method: 'DELETE' });
+                if (resp && resp.ok) {
+                    await refreshDashboard();
+                }
+            });
+
+            li.appendChild(deleteBtn);
             listEl.appendChild(li);
         });
 
@@ -29,10 +40,19 @@ async function loadForecast() {
     return await response.json();
 }
 
+function filterRecentEntries(entries, days) {
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - days);
+    return entries.filter(e => new Date(e.date) >= cutoff);
+}
+
 function renderChart(historyEntries, forecastData, showForecast) {
     const ctx = document.getElementById('weight-chart');
 
-    const historyPoints = historyEntries
+    const rangeDays = parseInt(document.getElementById('chart-range-select').value, 10);
+    const recentEntries = filterRecentEntries(historyEntries, rangeDays);
+
+    const historyPoints = recentEntries
         .sort((a, b) => new Date(a.date) - new Date(b.date))
         .map(e => ({ x: e.date, y: e.weight }));
 
@@ -116,3 +136,6 @@ document.getElementById('add-weight-form').addEventListener('submit', async (e) 
 document.getElementById('show-forecast-checkbox').addEventListener('change', refreshDashboard);
 
 document.addEventListener('DOMContentLoaded', refreshDashboard);
+
+document.getElementById('show-forecast-checkbox').addEventListener('change', refreshDashboard);
+document.getElementById('chart-range-select').addEventListener('change', refreshDashboard);

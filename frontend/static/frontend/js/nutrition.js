@@ -10,11 +10,11 @@ function createItemRow() {
     row.innerHTML = `
         <input type="text" class="item-name" placeholder="Название продукта" required>
         <label><input type="checkbox" class="item-is-liquid"> Жидкость</label>
-        <input type="number" class="item-amount" placeholder="Масса, г/мл" required>
-        <input type="number" step="0.01" class="item-calories" placeholder="Ккал/100г" required>
-        <input type="number" step="0.01" class="item-protein" placeholder="Белки/100г" required>
-        <input type="number" step="0.01" class="item-fat" placeholder="Жиры/100г" required>
-        <input type="number" step="0.01" class="item-carbs" placeholder="Углеводы/100г" required>
+        <input type="number" class="item-amount" placeholder="Масса" required>
+        <input type="number" step="0.01" class="item-calories" placeholder="Ккал" required>
+        <input type="number" step="0.01" class="item-protein" placeholder="Белки" required>
+        <input type="number" step="0.01" class="item-fat" placeholder="Жиры" required>
+        <input type="number" step="0.01" class="item-carbs" placeholder="Углеводы" required>
         <button type="button" class="remove-item-btn">Удалить</button>
     `;
 
@@ -40,11 +40,33 @@ function collectItems() {
     }));
 }
 
+function renderDailySummary(meals) {
+    const today = new Date().toISOString().slice(0, 10);
+    const todayMeals = meals.filter(m => m.date === today);
+
+    const totals = { calories: 0, protein: 0, fat: 0, carbs: 0 };
+    todayMeals.forEach(meal => {
+        meal.items.forEach(item => {
+            totals.calories += parseFloat(item.calories);
+            totals.protein += parseFloat(item.protein);
+            totals.fat += parseFloat(item.fat);
+            totals.carbs += parseFloat(item.carbs);
+        });
+    });
+
+    document.getElementById('daily-summary').textContent =
+        `Калории: ${totals.calories.toFixed(0)} ккал | ` +
+        `Белки: ${totals.protein.toFixed(1)} г | ` +
+        `Жиры: ${totals.fat.toFixed(1)} г | ` +
+        `Углеводы: ${totals.carbs.toFixed(1)} г`;
+}
+
 async function loadMeals() {
     const response = await apiFetch('/nutrition/meals/');
     if (!response || !response.ok) return;
 
     const meals = await response.json();
+    renderDailySummary(meals);
     const listEl = document.getElementById('meals-list');
     listEl.innerHTML = '';
 
@@ -63,13 +85,24 @@ async function loadMeals() {
 
             const itemsHtml = meal.items.map(item => `
                 <li>${item.name} — ${item.amount} г/мл
-                    (${item.calories} ккал/100г)</li>
+                    (${item.calories} ккал)</li>
             `).join('');
 
             block.innerHTML = `
                 <strong>${meal.date} — ${mealTypeLabels[meal.meal_type] || meal.meal_type}</strong>
                 <ul>${itemsHtml}</ul>
             `;
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Удалить приём пищи';
+            deleteBtn.addEventListener('click', async () => {
+                const resp = await apiFetch(`/nutrition/meals/${meal.id}/`, { method: 'DELETE' });
+                if (resp && resp.ok) {
+                    await loadMeals();
+                }
+            });
+            block.appendChild(deleteBtn);
+
             listEl.appendChild(block);
         });
 }

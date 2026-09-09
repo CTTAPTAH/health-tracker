@@ -5,7 +5,36 @@
 
 {% block content %}
     <div class="card">
-        <h2>Добавить приём пищи</h2>
+        <h2>Итого за сегодня</h2>
+        <p id="daily-summary">Загрузка...</p>
+    </div>
+
+    <div class="card">
+        <h2>Распознать еду через ИИ</h2>
+        <textarea id="ai-description" rows="3" style="width: 100%"
+                  placeholder="Например: тарелка овсянки с бананом и чашка кофе с молоком"></textarea>
+        <button type="button" id="ai-parse-btn">Распознать</button>
+        <p class="error" id="ai-error"></p>
+
+        <div id="ai-preview-container" style="display: none">
+            <h3>Проверьте и поправьте перед сохранением</h3>
+            <select id="ai-meal-type" required>
+                <option value="breakfast">Завтрак</option>
+                <option value="lunch">Обед</option>
+                <option value="dinner">Ужин</option>
+                <option value="snack">Перекус</option>
+            </select>
+            <input type="date" id="ai-meal-date" required>
+
+            <div id="ai-items-container"></div>
+
+            <button type="button" id="ai-confirm-btn">Сохранить приём пищи</button>
+            <button type="button" id="ai-cancel-btn">Отмена</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Добавить приём пищи вручную</h2>
         <form id="meal-form">
             <select id="meal-type" required>
                 <option value="breakfast">Завтрак</option>
@@ -32,4 +61,5 @@
 
 {% block extra_js %}
     <script src="{% static 'frontend/js/nutrition.js' %}"></script>
+    <script src="{% static 'frontend/js/ai_parser.js' %}"></script>
 {% endblock %}
